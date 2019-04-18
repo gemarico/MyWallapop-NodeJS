@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block titulo %} Área personal {% endblock %}
+
+{% block contenido_principal %}
+
+
+	<h2>Bienvenidos a wallapop</h2>
+	<h4>Área personal</h4>
+
+	<div class="container white">
+		<div class="table table-responsive">
+			<table class="table table-hover"
+				id="personalData">
+				<thead>
+					<tr>
+						<th >Email</th>
+						<th >Créditos</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td> {{ usuario.email }}</td>
+						<td>{{ usuario.credits }} €</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

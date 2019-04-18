@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>{% block titulo %} My Wallapop {% endblock %}</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  <!-- Optional theme -->
+  <link rel="stylesheet" type="text/css"href="//fonts.googleapis.com/css?family=Raleway" />
+  <link href="https://use.fontawesome.com/releases/v4.7.0/css/all.css" rel="stylesheet" >
+  <link href="https://bootswatch.com/4/lux/bootstrap.css" rel="stylesheet">
+  <link rel="stylesheet" href="/css/custom.css" />
+
+  {% block scripts %} {% endblock %}
+</head>
+
+<!-- Barra de Navegación superior -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <button type="button" class="navbar-toggler" data-toggle="collapse"
+          data-target="#myNavbar">&#x2630;</button>
+  <div class="collapse navbar-collapse" id="myNavbar">
+    <a class="navbar-brand" href="/" ><img src="/img/logo-sm-1.png"></a>
+
+    <ul class="nav navbar-nav mr-auto" >
+      <li id="offers-menu" class="nav-item" ><a href="/catalogue" class="nav-link">Catálogo de ofertas</a></li>
+      <li class="nav-item"><a href="/home" class="nav-link"></a></li>
+      <li id="users-menu" class="dropdown nav-item"><a class="dropdown-toggle nav-link user" data-toggle="dropdown"
+            >Gestión de usuarios <span class="caret"></span> </a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item"><a href="/user/list">Listado de usuarios</a></li>
+        </ul></li>
+      <li id="offersCreating-menu" class="dropdown nav-item"
+         ><a
+              class="dropdown-toggle nav-link" data-toggle="dropdown"
+            >Gestión de ofertas <span class="caret"></span>
+
+      </a>
+        <ul class="dropdown-menu">
+          <li class="dropdown-item"><a href="/offer/add" >Añadir Oferta</a></li>
+        </ul></li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto" >
+      <li class="nav-item"><a
+              href="/user/messagelist" class="nav-link"> <span>Mensajes</span></a></li>
+      <li class="nav-item"><a
+              href="/login" class="nav-link"> <span >Iniciar Sesión</span></a></li>
+      <li  class="nav-item"><a
+              href="/signup" class="nav-link"> <span>Regístrate</span></a></li>
+      <li id="logout"   class="nav-item"><a  href="/logout" class="nav-link" ><span >Cerrar Sesión</span> </a></li>
+    </ul>
+  </div>
+</nav>
+
+
+<body>
+
+<div class="container">
+  <script>
+      var mensaje = getUrlParameter('mensaje');
+      var tipoMensaje = getUrlParameter('tipoMensaje');
+      if ( mensaje != ""){
+          if (tipoMensaje == "" ){
+              tipoMensaje = 'alert-info';
+          }
+          $( ".container" )
+              .append("<div class='alert "+tipoMensaje+"'>"+mensaje+" </div>");
+      }
+      function getUrlParameter(name) {
+          name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+          var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+          var results = regex.exec(location.search);
+          return results === null ? '' :
+              decodeURIComponent(results[1].replace(/\+/g, ' '));
+      };
+  </script>
+	<!-- Contenido -->
+  {% block contenido_principal %}
+  <!-- Posible contenido por defecto -->
+  {% endblock %}
+
+</div>
+
+
+</body>
+</html>
