@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block titulo %} Listado de usuarios {% endblock %}
+
+{% block contenido_principal %}
+<h2>Listado de usuarios</h2>
+		<div class="container white">			
+			 <hr>
+             <hr>
+			<form class="form-horizontal justify-content-center" method="post" action="/user/delete">
+				<p>Estos son los usuarios registrados actualmente en el sistema</p>
+				<hr>
+             <hr>
+				<div class="table table-responsive">
+					<table class="table table-hover" id="tableUsers">
+						<thead>
+							<tr>
+								<th  input="" type="checkbox" id="checkbox"></th>
+								<th>Email</th>
+								<th>Nombre</th>
+								<th>Apellido</th>
+							</tr>
+						</thead>
+						<tbody>
+						{% for user in usuarios %}
+							<tr>
+								<td ><input type="checkbox"
+									value={{ user._id.toString()}} name="id"></td>
+								<td>{{user.email}}</td>
+								<td>{{user.name}}</td>
+								<td>{{user.lastName}}</td>
+							</tr>
+						{% endfor %}
+						</tbody>
+					</table>
+				</div>
+				<div class="form-group">
+					<div >
+						<button id="botonS" type="submit" class="btn btn-primary">Eliminar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+{% endblock %}

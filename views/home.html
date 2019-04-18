@@ -14,17 +14,50 @@
 				id="personalData">
 				<thead>
 					<tr>
+						<th >Nombre</th>
 						<th >Email</th>
-						<th >Créditos</th>
+						<th >Saldo disponible</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
+						<td> {{ usuario.name }}</td>
 						<td> {{ usuario.email }}</td>
 						<td>{{ usuario.credits }} €</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
+		{% if usuario.email != "admin@email.com" %}
+		<hr>
+		<hr>
+		<h4>Ofertas activas</h4>
+		<hr>
+		<hr>
+		<div class="table table-responsive">
+			<table class="table table-hover" id="createdOffers">
+				<thead>
+				<tr>
+					<th>Título</th>
+					<th>Fecha</th>
+					<th>Descripción</th>
+					<th>Precio</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for oferta in ofertasC %}
+				<tr>
+					<td>{{oferta.title}}</td>
+					<td>{{oferta.date.getDate()+"-"+oferta.date.getMonth()+"-"+oferta.date.getFullYear()}}</td>
+					<td>{{oferta.description}}</td>
+					<td>{{oferta.price}} €</td>
+					<td><a href="/offer/delete/{{ oferta._id.toString()}}">Eliminar</a></td>
+				</tr>
+				{% endfor %}
+
+				</tbody>
+			</table>
+		</div>
+		{% endif %}
 	</div>
 {% endblock %}

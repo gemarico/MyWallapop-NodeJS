@@ -1,0 +1,118 @@
+@CHARSET "ISO-8859-1";
+
+/* Sticky footer styles-------------------------------------------------- */
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+body {
+	margin-bottom: 60px;
+	font-family: Raleway;
+	font-style: normal;
+	font-variant: normal;
+	text-align: center;
+	background: url("/img/fondo-b.jpg");
+	background-size: cover;
+	background-position: center center;
+	background-repeat: no-repeat;
+}
+
+
+
+nav {
+	height: 50px;
+	margin-bottom: 20px;
+}
+
+@media screen and (max-width: 1400px) {
+	body {
+		font-size: 14px;
+		
+	}
+	ul li {
+		font-size: 11px;
+	}
+	
+	nav {
+		height: 100%;
+	}
+	h1, h2, h3, h4 {
+		font-size: 16px;
+		
+	}
+	button {
+		font-size: 14px;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	body {
+		font-size: 10px;
+		
+	}
+	nav {
+		height: 100%;
+	}
+	ul li {
+		font-size: 9px;
+	}
+	h1, h2, h3, h4 {
+		font-size: 11px;
+		
+	}
+	button {
+		font-size: 11px;
+	}
+}
+
+.container.white {
+	margin-top: 40px;
+	text-align: center;
+	background-color: white;
+}
+
+input {
+	border: 1px solid black;
+	outline: 2px solid grey;
+}
+
+label {
+	color: black;
+}
+
+textarea {
+	resize: none;
+	margin-bottom: 20px;
+	border: 1px solid black;
+	outline: 2px solid grey;
+}
+
+h1, h2 {
+	margin-top: 40px;
+	font-size: 18px;
+}
+
+hr {
+	border: 1px solid black;
+}
+
+pagination {
+	margin-top: 20px;
+}
+
+footer {
+	color:black;
+	position: absolute;
+	margin-top: 60px;
+	bottom: 0;
+	width: 100%;
+	height: 60px;
+	background-color: #101010;
+	text-align: center;
+	line-height: 60px;
+	z-index: 999;
+}
+
+/* Sticky footer styles-------------------------------------------------- */
+

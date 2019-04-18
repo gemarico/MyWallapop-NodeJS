@@ -27,33 +27,43 @@
           data-target="#myNavbar">&#x2630;</button>
   <div class="collapse navbar-collapse" id="myNavbar">
     <a class="navbar-brand" href="/" ><img src="/img/logo-sm-1.png"></a>
-
     <ul class="nav navbar-nav mr-auto" >
+      {% if usuario!=null && usuario.email != "admin@email.com" %}
       <li id="offers-menu" class="nav-item" ><a href="/catalogue" class="nav-link">Catálogo de ofertas</a></li>
-      <li class="nav-item"><a href="/home" class="nav-link"></a></li>
-      <li id="users-menu" class="dropdown nav-item"><a class="dropdown-toggle nav-link user" data-toggle="dropdown"
-            >Gestión de usuarios <span class="caret"></span> </a>
+      {% endif %}
+      {% if usuario!=null  %}
+      <li class="nav-item"><a href="/home" class="nav-link"><span>Área personal</span></a></li>
+      {% endif %}
+
+      {% if usuario!=null && usuario.email == "admin@email.com" %}
+      <li id="users-menu" class="dropdown nav-item"><a class="dropdown-toggle nav-link user" data-toggle="dropdown">Gestión de usuarios <span class="caret"></span> </a>
         <ul class="dropdown-menu">
           <li class="dropdown-item"><a href="/user/list">Listado de usuarios</a></li>
-        </ul></li>
-      <li id="offersCreating-menu" class="dropdown nav-item"
-         ><a
-              class="dropdown-toggle nav-link" data-toggle="dropdown"
-            >Gestión de ofertas <span class="caret"></span>
+        </ul>
+      </li>
+      {% endif %}
 
-      </a>
+      {% if usuario!=null && usuario.email != "admin@email.com" %}
+      <li id="offersCreating-menu" class="dropdown nav-item"><a class="dropdown-toggle nav-link" data-toggle="dropdown" >Gestión de ofertas <span class="caret"></span></a>
         <ul class="dropdown-menu">
           <li class="dropdown-item"><a href="/offer/add" >Añadir Oferta</a></li>
-        </ul></li>
+        </ul>
+      </li>
+      {% endif %}
     </ul>
+
     <ul class="nav navbar-nav ml-auto" >
-      <li class="nav-item"><a
-              href="/user/messagelist" class="nav-link"> <span>Mensajes</span></a></li>
-      <li class="nav-item"><a
-              href="/login" class="nav-link"> <span >Iniciar Sesión</span></a></li>
-      <li  class="nav-item"><a
-              href="/signup" class="nav-link"> <span>Regístrate</span></a></li>
+      {% if usuario!=null %}
+      {% if usuario.email!="admin@email.com" %}
+      <li class="nav-item"><a href="/user/messagelist" class="nav-link"> <span>Mensajes</span></a></li>
+      {% endif %}
       <li id="logout"   class="nav-item"><a  href="/logout" class="nav-link" ><span >Cerrar Sesión</span> </a></li>
+      {% else %}
+      <li class="nav-item"><a href="/login" class="nav-link"> <span >Iniciar Sesión</span></a></li>
+      {% if usuario.email!="admin@email.com" %}
+      <li  class="nav-item"><a href="/signup" class="nav-link"> <span>Regístrate</span></a></li>
+      {% endif %}
+      {% endif %}
     </ul>
   </div>
 </nav>
@@ -87,6 +97,11 @@
 
 </div>
 
-
+<!-- footer.html -->
+<footer class="footer">
+  <div class="container">
+    <span class="text-muted">&copy; My Wallapop - Copyright - Gema Rico Pozas UO238096</span>
+  </div>
+</footer>
 </body>
 </html>

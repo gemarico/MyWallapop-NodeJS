@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="fragments/head"></head>
+<nav th:replace="fragments/nav"></nav>
+<body>
+
+<h2 th:text="#{welcome.message}"></h2>
+		<h4 th:text="#{login.private.message}"></h4>
+	<div class="container white" style="text-align: center">
+		
+		 <hr>
+                	  <hr>
+		<div class="table table-responsive"
+			sec:authorize="hasRole('ROLE_CLIENT')">
+			<h4 th:text="#{messages.message}"></h4>
+			 <hr>
+                	  <hr>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th th:text="#{message.author}"></th>
+						<th th:text="#{message.message}"></th>
+						<th th:text="#{offer.date}"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="message : ${messagesList}">
+						<td th:text="${message.author}"></td>
+						<td th:text="${message.text}"></td>
+						<td th:text="${message.getTime()}"></td>
+					</tr>
+				</tbody>
+			</table>
+			 
+			<form class="form-horizontal justify-content-center" method="post"
+				th:action="${'/user/addmessage/' + offer.id}" th:object="${message}">
+				<div class="form-group">
+					<textarea class="form-control" rows="5" cols="70" maxlength="50"
+						name="text" id="textarea" th:placeholder="#{message.placeholder}"
+						required="true"></textarea>
+					<script th:inline="javascript">
+						/*<![CDATA[*/
+						$('textarea')
+								.keyup(
+										function() {
+											var characterCount = $(this).val().length, current = $('#current'), maximum = $('#maximum'), theCount = $('#the-count');
+											current.text(characterCount);
+										});
+						/*]]>*/
+					</script>
+					<div id="the-count">
+						<span id="current">0</span> <span id="maximum">/ 50</span>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div>
+						<button type="submit" class="btn btn-primary" id="botonS"
+							th:text="#{send.message}"></button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="fragments/footer"></footer>
+</body>
+
+</html>

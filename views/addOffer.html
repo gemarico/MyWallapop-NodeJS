@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block titulo %} Añadir oferta {% endblock %}
+
+{% block contenido_principal %}
+		<div class="container">
+			<h2></h2>
+			<form class="form-horizontal justify-content-center" method="post" action="/offer/add" >
+				<div class="form-group">
+					<label  for="pwd"
+						>Título</label>
+					<div>
+						<input id="title" type="text" class="form-control" name="title"
+							placeholder="Introduzca el título de la oferta" required="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="pwd">Descripción</label>
+					<div >
+						<input id="description" type="text" class="form-control" name="description"
+							placeholder="Introduzca una descripción de la oferta" required="true">
+
+					</div>
+				</div>
+				<div class="form-group">
+					<label for="pwd">Destacar oferta por 20€</label>
+					 <input type="checkbox" 
+						value={{oferta._id.toString()}} name="id">
+
+				</div>
+				<div class="form-group">
+					<label for="pwd">Precio</label>
+					<div>
+						<input  id= "price" type="number" class="form-control" name="price" step=".01" min="0"
+							placeholder="precio mayor que 0" required="true">
+					</div>
+				</div>
+				<div class="form-group">
+					<div>
+						<button id="botonS" type="submit" class="btn btn-primary"
+							>Enviar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+{% endblock %}
