@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block titulo %} Inicia sesión {% endblock %}
+
+{% block contenido_principal %}
+            <div class="container">
+                	<h2 class="text-center">Inicia sesión</h2>
+
+                <div class="container" >
+                    <form class="form-horizontal justify-content-center" method="post" action="/login" >
+                        <div class="form-group">
+                            <label for ="email">Email</label>
+                            <div >
+                                <input  type="email" id ="email" class="form-control" name="email" placeholder="gema@email.com"
+                                required="true">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for = "password">Password</label>
+                            <div >
+                                <input   id="password" type="password" class="form-control"
+                                name="password" placeholder="introduzca password" required="true">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div >
+                                <button type="submit" id="submit" class="btn btn-primary" >Enviar</button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                    </form>
+                </div>
+            </div>
+{% endblock %}
