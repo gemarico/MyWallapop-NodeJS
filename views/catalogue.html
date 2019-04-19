@@ -1,161 +1,72 @@
-<!DOCTYPE html>
-<html lang="en">
-<head th:replace="fragments/head"></head>
-<nav th:replace="fragments/nav"></nav>
-<body>
+{% extends "base.html" %}
 
-	<h2 th:text="#{catalogue.message}"></h2>
+{% block titulo %} Catálogo de ofertas {% endblock %}
 
+{% block contenido_principal %}
 
-	<h4 th:text="#{catalogue.description.message}"></h4>
+	<h2>Catalogo</h2>
+	<h4>Ofertas</h4>
 	<div class="container">
-		<form class="form-horizontal justify-content-center"
-			action="/catalogue">
-			<div class="form-group">
-				<input name="searchText" type="text" class="form-control">
-			</div>
-			<button type="submit" class="btn btn-primary" id="botonS"
-				th:text="#{search.message}"></button>
-		</form>
+		<!-- Búsqueda -->
+				<form class="form-horizontal justify-content-center"
+					  method="get" action="/catalogue">
+					<div class="form-group">
+						<input name="searchText"  placeholder="Titulo de la oferta" type="text" class="form-control">
+					</div>
+					<button type="submit" class="btn btn-primary" id="botonS"
+							>Buscar</button>
+				</form>
 	</div>
 	<div class="container white" style="text-align: center">
 		<hr>
 		<hr>
-		<div class="fixed-top">
-			<div class="alert fixed-top alert-danger collapse" id="alert"
-				th:text="#{notCredits}"></div>
-		</div>
-
-		<h4 th:text="#{offers.title.flash}"></h4>
+		<h4>Ofertas</h4>
 		<hr>
 		<hr>
-		<div class="table table-responsive"
-			sec:authorize="hasRole('ROLE_CLIENT')">
-			<table class="table table-hover" th:fragment="tableFlash"
-				id="tableFlash">
-				<thead>
-					<tr>
-						<th th:text="#{offer.title}"></th>
-						<th th:text="#{offer.date}"></th>
-						<th th:text="#{offer.description}"></th>
-						<th th:text="#{offer.price}"></th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="flash : ${flashList}">
-
-						<td th:text="${flash.title}"></td>
-						<td th:text="${flash.date}"></td>
-						<td th:text="${flash.description}"></td>
-						<td th:text="${flash.price}"></td>
-						<td>
-							<div th:unless="${flash.sold}">
-								<a th:href="${'/user/addmessage/' + flash.id}"
-									th:text="#{chat.message}"></a>
-							</div>
-						</td>
-						<td>
-							<div th:unless="${flash.sold}">
-								<button name="buy" class="btn btn-secondary"
-									th:id="${'buyButtonf' + flash.id}" th:text="#{buy.message}"></button>
-								<script th:inline="javascript">
-								 /*<![CDATA[*/
-								 $( "#buyButtonf[[${flash.id}]]" ).click(function() {
-								 $.post( "/catalogue/buyFlash/[[${flash.id}]]", function( data ) {
-								 var price = [[${flash.price}]];
-								 var credits = [[${user.credits}]];								 
-								 var numberPage = [[${param.page}]];
-								 var urlUpdate = '/catalogue/update/flash';
-								 if ( numberPage != null ){
-								 urlUpdate += "?page="+numberPage[0];
-								 }
-								 if(price>credits){
-									 $('#alert').show().delay(400).addClass("in").fadeOut(3500);									
-								 }
-								$("#tableFlash").load(urlUpdate);
-								 });
-								 });
-								 /*]]>*/
-								 </script>
-							</div>
-							<div th:if="${flash.sold}">
-								<p th:text="#{sold.message}"></p>
-							</div>
-						</td>
-
-					</tr>
-
-				</tbody>
-			</table>
-		</div>
-		<hr>
-		<hr>
-		<h4 th:text="#{offers.title}"></h4>
-		<hr>
-		<hr>
-		<div class="table table-responsive"
-			sec:authorize="hasRole('ROLE_CLIENT')">
-			<table class="table table-hover" th:fragment="tableOffers"
+		<div class="table table-responsive">
+			<table class="table table-hover"
 				id="tableOffers">
 				<thead>
 					<tr>
-						<th th:text="#{offer.title}"></th>
-						<th th:text="#{offer.date}"></th>
-						<th th:text="#{offer.description}"></th>
-						<th th:text="#{offer.price}"></th>
+						<th>Titulo</th>
+						<th>Fecha</th>
+						<th>Descripcion</th>
+						<th>Precio</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr th:each="offer : ${offerList}">
-
-						<td th:text="${offer.title}"></td>
-						<td th:text="${offer.date}"></td>
-						<td th:text="${offer.description}"></td>
-						<td th:text="${offer.price}"></td>
-						<td>
-							<div th:unless="${offer.sold}">
-								<a th:href="${'/user/addmessage/' + offer.id}"
-									th:text="#{chat.message}"></a>
-							</div>
-						</td>
-						<td>
-							<div th:unless="${offer.sold}">
-								<button name="buy" class="btn btn-secondary"
-									th:id="${'buyButton' + offer.id}" th:text="#{buy.message}"></button>
-								<script th:inline="javascript">
-								 /*<![CDATA[*/
-								 $( "#buyButton[[${offer.id}]]" ).click(function() {
-								 $.post( "/catalogue/buyOffer/[[${offer.id}]]", function( data ) {
-								 var price = [[${offer.price}]];
-								 var credits = [[${user.credits}]];								 
-								 var numberPage = [[${param.page}]];
-								 var urlUpdate = '/catalogue/update';
-								 if ( numberPage != null ){
-								 urlUpdate += "?page="+numberPage[0];
-								 }
-								 if(price>credits){
-									 $('#alert').show().delay(400).addClass("in").fadeOut(3500);									
-								 }
-								$("#tableOffers").load(urlUpdate);
-								 });
-								 });
-								 /*]]>*/
-								 </script>
-							</div>
-							<div th:if="${offer.sold}">
-								<p th:text="#{sold.message}"></p>
-							</div>
-						</td>
-
+				{% for oferta in ofertas %}
+					<tr>
+						<td>{{oferta.title}}</td>
+						<td>{{oferta.date.getDate()+"-"+oferta.date.getMonth()+"-"+oferta.date.getFullYear()}}</td>
+						<td>{{oferta.description}}</td>
+						<td>{{oferta.price}} €</td>
+						{% if oferta.sold %}
+						<td>Vendido</td>
+						{% else %}
+						<form class="form-horizontal justify-content-center"
+							  method="post" action="/catalogue">
+						<td><button name="buy" value="{{ oferta._id.toString()}}" class="btn btn-secondary">Comprar</button></td>
+						</form>
+						{% endif %}
 					</tr>
-
+				{% endfor %}
 				</tbody>
 			</table>
 		</div>
-		<footer th:replace="fragments/pagination"></footer>
 	</div>
-	<footer th:replace="fragments/footer"></footer>
+<!-- Paginación mostrar la actual y 2 anteriores y dos siguientes -->
+<div class="pagination justify-content-center" >
+	<ul class="pagination justify-content-center" style="margin-bottom: 100px ">
+		{% for pagina in paginas %}
+		<li class="page-item" id="pi-{{ pagina}}">
+			<a class="page-link" href="/catalogue?pg={{ pagina }}" >{{ pagina }}</a>
+		</li>
+		{% endfor %}
+		<script>
+			$( "#pi-{{ actual}}" ).addClass("active");
+		</script>
+	</ul>
+</div>
+{% endblock %}
 
-</body>
-
-</html>

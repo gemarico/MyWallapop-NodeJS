@@ -74,13 +74,30 @@ module.exports = {
             }
         });
     },
-    modificarCancion : function(criterio, cancion, funcionCallback) {
+    modificarOferta : function(criterio, oferta, funcionCallback) {
         this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
             if (err) {
                 funcionCallback(null);
             } else {
-                var collection = db.collection('canciones');
-                collection.updateOne(criterio, {$set: cancion}, function(err, result) {
+                var collection = db.collection('ofertas');
+                collection.updateOne(criterio, {$set: oferta}, function(err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    modificarUsuario : function(criterio, usuario, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('usuarios');
+                collection.updateOne(criterio, {$set: usuario}, function(err, result) {
                     if (err) {
                         funcionCallback(null);
                     } else {
@@ -97,7 +114,24 @@ module.exports = {
                 funcionCallback(null);
             } else {
                 var collection = db.collection('ofertas');
-                collection.removeOne(criterio, function (err, result) {
+                collection.removeMany(criterio, function (err, result) {
+                    if (err) {
+                        funcionCallback(null);
+                    } else {
+                        funcionCallback(result);
+                    }
+                    db.close();
+                });
+            }
+        });
+    },
+    eliminarUsuario : function(criterio, funcionCallback) {
+        this.mongo.MongoClient.connect(this.app.get('db'), function (err, db) {
+            if (err) {
+                funcionCallback(null);
+            } else {
+                var collection = db.collection('usuarios');
+                collection.removeMany(criterio, function (err, result) {
                     if (err) {
                         funcionCallback(null);
                     } else {
@@ -142,19 +176,19 @@ module.exports = {
             }
         });
     },
-    obtenerCancionesPg : function(criterio,pg,funcionCallback){
+    obtenerOfertasPg : function(criterio,pg,funcionCallback){
     this.mongo.MongoClient.connect(this.app.get('db'), function(err, db) {
         if (err) {
             funcionCallback(null);
         } else {
-            var collection = db.collection('canciones');
+            var collection = db.collection('ofertas');
             collection.count(function(err, count){
                 collection.find(criterio).skip( (pg-1)*4 ).limit( 4 )
-                    .toArray(function(err, canciones) {
+                    .toArray(function(err, ofertas) {
                         if (err) {
                             funcionCallback(null);
                         } else {
-                            funcionCallback(canciones, count);
+                            funcionCallback(ofertas, count);
                         }
                         db.close();
                     });

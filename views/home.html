@@ -52,9 +52,44 @@
 					<td>{{oferta.description}}</td>
 					<td>{{oferta.price}} €</td>
 					<td><a href="/offer/delete/{{ oferta._id.toString()}}">Eliminar</a></td>
+					{% if oferta.sold %}
+					<td>Vendido</td>
+					{% else %}
+						{% if oferta.flash %}
+							<td><a href="/offer/flash/{{ oferta._id.toString()}}">Normal</a></td>
+						{% else %}
+							<td><a href="/offer/flash/{{ oferta._id.toString()}}">Destacar[20€]</a></td>
+						{% endif %}
+					{% endif %}
 				</tr>
 				{% endfor %}
-
+				</tbody>
+			</table>
+		</div>
+		<hr>
+		<hr>
+		<h4>Ofertas compradas</h4>
+		<hr>
+		<hr>
+		<div class="table table-responsive">
+			<table class="table table-hover" id="pruchasedOffers">
+				<thead>
+				<tr>
+					<th>Título</th>
+					<th>Descripción</th>
+					<th>Precio</th>
+					<th>Vendedor</th>
+				</tr>
+				</thead>
+				<tbody>
+				{% for oferta in ofertasP %}
+				<tr>
+					<td>{{oferta.title}}</td>
+					<td>{{oferta.description}}</td>
+					<td>{{oferta.price}} €</td>
+					<td>{{oferta.owner}}</td>
+				</tr>
+				{% endfor %}
 				</tbody>
 			</table>
 		</div>

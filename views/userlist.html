@@ -15,7 +15,7 @@
 					<table class="table table-hover" id="tableUsers">
 						<thead>
 							<tr>
-								<th  input="" type="checkbox" id="checkbox"></th>
+								<th input="" type="checkbox" id="checkbox"></th>
 								<th>Email</th>
 								<th>Nombre</th>
 								<th>Apellido</th>
@@ -24,8 +24,7 @@
 						<tbody>
 						{% for user in usuarios %}
 							<tr>
-								<td ><input type="checkbox"
-									value={{ user._id.toString()}} name="id"></td>
+								<td><input type="checkbox" name="emails" value={{ user.email }} ></td>
 								<td>{{user.email}}</td>
 								<td>{{user.name}}</td>
 								<td>{{user.lastName}}</td>
