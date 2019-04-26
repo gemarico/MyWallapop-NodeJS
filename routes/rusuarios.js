@@ -9,6 +9,18 @@ module.exports = function (app, swig, gestorBD) {
         res.send(respuesta);
     });
 
+    app.get("/user/messagelist", function (req, res) {
+        var userSesion = {email: req.session.usuario};
+            gestorBD.obtenerUsuarios(userSesion, function (usuarios) {
+
+                var respuesta = swig.renderFile('views/messagelist.html', {
+
+                   usuario: usuarios[0]
+                });
+                res.send(respuesta);
+            });
+    });
+
     app.get("/user/list", function (req, res) {
             var criterio = {email: {$ne: "admin@email.com"}};
             gestorBD.obtenerUsuarios(criterio, function (usuarios) {
@@ -28,6 +40,7 @@ module.exports = function (app, swig, gestorBD) {
 
     app.post('/user/delete', function (req, res) {
         var emails = req.body.emails;
+        if(emails != null ){
         if (typeof (emails) == "string") {
             var criterio = {email: emails};
             var criterioOfertas = {owner: emails};
@@ -51,6 +64,11 @@ module.exports = function (app, swig, gestorBD) {
                 });
             }
         });
+        }
+        else{
+            res.redirect("/user/list" + "?mensaje=No se han seleccionado usuarios" +
+                "&tipoMensaje=alert-danger ");
+        }
     });
 
     app.get('/logout', function (req, res) {

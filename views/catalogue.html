@@ -44,9 +44,10 @@
 						{% if oferta.sold %}
 						<td>Vendido</td>
 						{% else %}
+						<td><a href="/user/addMessage/{{ oferta._id.toString()}}">Enviar mensaje</a></td>
 						<form class="form-horizontal justify-content-center"
 							  method="post" action="/catalogue">
-						<td><button name="buy" value="{{ oferta._id.toString()}}" class="btn btn-secondary">Comprar</button></td>
+							<td><button name="buy" value="{{ oferta._id.toString()}}" class="btn btn-secondary">Comprar</button></td>
 						</form>
 						{% endif %}
 					</tr>
