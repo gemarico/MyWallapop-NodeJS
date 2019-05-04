@@ -5,22 +5,31 @@
     <title>Title</title>
 </head>
 <body>
+<h2>Catálogo de ofertas</h2>
+<hr>
 <div id="widget-catalogue">
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th>Titulo</th>
-            <th>Fecha</th>
-            <th>Descripcion</th>
-            <th>Precio</th>
-            <th>Vendedor</th>
-        </tr>
-        </thead>
-        <tbody id="tablaCuerpo">
+    <div class="container white" style="text-align: center">
+        <div class="table table-responsive">
+            <table class="table table-hover"
+                   id="tableOffers">
+                <thead>
+                <tr>
+                    <th>Titulo</th>
+                    <th>Fecha</th>
+                    <th>Descripcion</th>
+                    <th>Precio</th>
+                    <th>Vendedor</th>
+                </tr>
+                </thead>
+                <tbody id="tablaCuerpo">
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
 </div>
+
 </body>
 </html>
 
@@ -47,7 +56,6 @@
     }
 
 
-
     function actualizarTabla(ofertasMostrar) {
         $("#tablaCuerpo").empty(); // Vaciar la tabla
         if (ofertasMostrar.length > 0) {
@@ -59,7 +67,7 @@
                     "<td>" + ofertasMostrar[i].description + "</td>" +
                     "<td>" + ofertasMostrar[i].price + ' €' + "</td>" +
                     "<td>" + ofertasMostrar[i].owner + "</td>" +
-                    "<td>" + "<a onclick=enviarMensaje('" + ofertasMostrar[i]._id + "')>Enviar mensaje</a>" +
+                    "<td>" + "<button class=\"btn btn-secondary\" onclick=enviarMensaje('" + ofertasMostrar[i]._id + "')>Enviar mensaje</button>" +
                     "</td>" +
                     "</tr>");
             }
@@ -69,9 +77,28 @@
     cargarOfertas();
 
     function enviarMensaje(id) {
-        idOffer = id;
-        sender = user;
-        $("#contenedor-principal").load("widget-mensaje.html");
+        // idOffer = id;
+        // sender = user;
+        // $("#contenedor-principal").load("widget-mensaje.html");
+        $.ajax({
+            url: URLbase + "/addmensaje",
+            type: "POST",
+            data: {
+                sender: user,
+                senderActual : user,
+                idOffer: id,
+                texto: $("#message").val()
+            },
+            dataType: 'json',
+            headers: {"token": token},
+            success: function (respuesta) {
+                $("#contenedor-principal").load("widget-chat.html");
+            },
+            error: function (error) {
+                $("#contenedor-principal").load("widget-login.html");
+            }
+        });
+
     }
 
     function showChat() {

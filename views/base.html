@@ -47,7 +47,7 @@
             {% endif %}
 
             {% if usuario!=null && usuario.email != "admin@email.com" %}
-            <li id="offersCreating-menu" class="dropdown nav-item"><a class="dropdown-toggle nav-link"
+            <li  style='cursor: pointer' id="offersCreating-menu" class="dropdown nav-item"><a class="dropdown-toggle nav-link"
                                                                       data-toggle="dropdown">Gestión de ofertas <span
                     class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -60,12 +60,12 @@
         <ul class="nav navbar-nav ml-auto">
             <li class="nav-item"><a href="/api" class="nav-link"> <span>MyChat</span></a></li>
             {% if usuario!=null %}
-            <li id="usersPersonal-menu" class="dropdown nav-item"><a class="dropdown-toggle nav-link"
+            <li style='cursor: pointer' id="usersPersonal-menu" class="dropdown nav-item"><a class="dropdown-toggle nav-link"
                                                                      data-toggle="dropdown"><span><i
                     class="fa fa-user"></i></span> </a>
                 <ul class="dropdown-menu">
-                    <li class="dropdown-item"> {{usuario.email}}</li>
-                    <li class="dropdown-item">{{usuario.credits}} €</li>
+                    <li style='cursor: default' class="dropdown-item"> {{usuario.email}}</li>
+                    <li style='cursor: default' class="dropdown-item">{{usuario.credits}} €</li>
                 </ul>
             </li>
             <li id="logout" class="nav-item"><a href="/logout" class="nav-link"><span>Cerrar Sesión</span> </a></li>
