@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="widget-catalogue">
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Titulo</th>
+            <th>Fecha</th>
+            <th>Descripcion</th>
+            <th>Precio</th>
+            <th>Vendedor</th>
+        </tr>
+        </thead>
+        <tbody id="tablaCuerpo">
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
+
+<script>
+    var ofertas;
+    var user;
+
+    function cargarOfertas() {
+        $.ajax({
+            url: URLbase + "/catalogue",
+            type: "GET",
+            data: {},
+            dataType: 'json',
+            headers: {"token": token},
+            success: function (respuesta) {
+                ofertas = respuesta.ofertas;
+                user = respuesta.user;
+                actualizarTabla(ofertas);
+            },
+            error: function (error) {
+                $("#contenedor-principal").load("widget-login.html");
+            }
+        });
+    }
+
+
+
+    function actualizarTabla(ofertasMostrar) {
+        $("#tablaCuerpo").empty(); // Vaciar la tabla
+        if (ofertasMostrar.length > 0) {
+            for (i = 0; i < ofertasMostrar.length; i++) {
+                $("#tablaCuerpo").append(
+                    "<tr id=" + ofertasMostrar[i]._id + ">" +
+                    "<td>" + ofertasMostrar[i].title + "</td>" +
+                    "<td>" + new Date(ofertasMostrar[i].date).getDate() + "-" + new Date(ofertasMostrar[i].date).getMonth() + "-" + new Date(ofertasMostrar[i].date).getFullYear() + "</td>" +
+                    "<td>" + ofertasMostrar[i].description + "</td>" +
+                    "<td>" + ofertasMostrar[i].price + ' €' + "</td>" +
+                    "<td>" + ofertasMostrar[i].owner + "</td>" +
+                    "<td>" + "<a onclick=enviarMensaje('" + ofertasMostrar[i]._id + "')>Enviar mensaje</a>" +
+                    "</td>" +
+                    "</tr>");
+            }
+        }
+    }
+
+    cargarOfertas();
+
+    function enviarMensaje(id) {
+        idOffer = id;
+        sender = user;
+        $("#contenedor-principal").load("widget-mensaje.html");
+    }
+
+    function showChat() {
+        $("#contenedor-principal").load("widget-chat.html");
+    }
+
+    function showCatalogue() {
+        $("#contenedor-principal").load("widget-catalogue.html");
+    }
+
+</script>

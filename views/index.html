@@ -2,9 +2,59 @@
 
 {% block titulo %} My Wallapop {% endblock %}
 {% block contenido_principal %}
+<body style="background-image: none">
 
-<div class="container">
+<div id="carouselExampleIndicators" class="carousel slide">
+
+	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+		<ol class="carousel-indicators">
+			<li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+			<li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+		</ol>
+	<div class="carousel-inner" role="listbox">
+		<div class="carousel-item active" style="background-image: url('/img/1.jpg')">
+			<div class="carousel-caption d-none d-md-block">
+				<p class="lead" style="background-color: white; color: #101010">Encuentra lo que buscas entre millones de productos.</p>
+			</div>
+		</div>
+		<div class="carousel-item" style="background-image: url('/img/2.jpg')">
+			<div class="carousel-caption d-none d-md-block">
+				<p class="lead"style="background-color: white; color: #101010">Paga cómodamente con nuestro sistema de créditos.</p>
+			</div>
+		</div>
+		<div class="carousel-item" style="background-image: url('/img/3.jpg')">
+			<div class="carousel-caption d-none d-md-block">
+				<p class="lead"style="background-color: white; color: #101010">Añade las cosas que ya no usas y gana dinero!</p>
+			</div>
+		</div>
+	</div>
+	<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+		<span class="sr-only">Anterior</span>
+	</a>
+	<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+		<span class="sr-only">Siguiente</span>
+	</a>
+</div>
+</div>
+
+<div class="container" >
 	<h1>Bienvenidos a My Wallapop</h1>
 	<h2>¡Empieza a vender lo que ya no usas!</h2>
+	<p>MyWallapop, la web y app de compra-venta más grande del país en la que millones de usuarios compran y venden
+		productos nuevos, productos de segunda mano, coches de segunda mano u ofrecen y contratan servicios entre particulares.
+		Usando MyWallapop ahorrarás dinero y conseguirás un ingreso extra vendiendo lo que ya no utilizas.
+		En MyWallapop encontrarás el catálogo más amplio de anuncios clasificados y podrás publicar anuncios gratis.
+		Funciona en toda España, desde tu móvil o desde el ordenador.
+		Hay anuncios de pisos, casas, móviles de segunda mano o servicios.
+		Usando MyWallapop ayudarás también a hacer un mundo más sostenible reutilizando miles de productos.
+		MyWallapop, gana dinero vendiendo lo que no usas y encuentra oportunidades cerca de ti.</p>
+	<form method="get" action="/login" >
+	<button name="login" class="btn btn-primary">Ver catálogo</button>
+	</form>
+
 </div>
+</body>
 {% endblock %}

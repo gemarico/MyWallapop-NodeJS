@@ -4,10 +4,10 @@
 
 {% block contenido_principal %}
 
-	<h2>Catalogo</h2>
-	<h4>Ofertas</h4>
+	<h2>Catálogo de ofertas</h2>
 	<div class="container">
 		<!-- Búsqueda -->
+		<div class="col-md-9 col-lg-8 mx-auto" >
 				<form class="form-horizontal justify-content-center"
 					  method="get" action="/catalogue">
 					<div class="form-group">
@@ -16,13 +16,13 @@
 					<button type="submit" class="btn btn-primary" id="botonS"
 							>Buscar</button>
 				</form>
+		</div>
+	</div>
+
+<hr>
+<h2>Ofertas</h2>
 	</div>
 	<div class="container white" style="text-align: center">
-		<hr>
-		<hr>
-		<h4>Ofertas</h4>
-		<hr>
-		<hr>
 		<div class="table table-responsive">
 			<table class="table table-hover"
 				id="tableOffers">
@@ -44,7 +44,6 @@
 						{% if oferta.sold %}
 						<td>Vendido</td>
 						{% else %}
-						<td><a href="/user/addMessage/{{ oferta._id.toString()}}">Enviar mensaje</a></td>
 						<form class="form-horizontal justify-content-center"
 							  method="post" action="/catalogue">
 							<td><button name="buy" value="{{ oferta._id.toString()}}" class="btn btn-secondary">Comprar</button></td>

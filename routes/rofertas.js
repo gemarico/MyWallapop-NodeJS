@@ -43,11 +43,20 @@ module.exports = function (app, swig, gestorBD) {
 
 
     app.get("/offer/add", function (req, res) {
-        var respuesta = swig.renderFile('views/addOffer.html', {
-            usuario: req.session.usuario
+        var userSesion = {email: req.session.usuario};
+
+        gestorBD.obtenerUsuarios(userSesion, function (usuarios) {
+            if (usuarios == null || usuarios.length == 0)
+                res.send("Error al encontrar usuario");
+            else {
+                res.send(swig.renderFile('views/addOffer.html', {
+                    usuario: usuarios[0]
+                }));
+            }
         });
-        res.send(respuesta);
+
     });
+
 
     app.post('/catalogue', function (req, res) {
         var offerid = {_id: gestorBD.mongo.ObjectID(req.body.buy)};
