@@ -70,7 +70,7 @@ routerUsuarioToken.use(function (req, res, next) {
 
         // verificar el token
         jwt.verify(token, 'secreto', function (err, infoToken) {
-            if (err || (Date.now() / 1000 - infoToken.tiempo) > 240) {
+            if (err || (Date.now() / 1000 - infoToken.tiempo) > 1000) {
                 res.status(403); // Forbidden
                 res.json({
                     acceso: false,
@@ -97,9 +97,9 @@ routerUsuarioToken.use(function (req, res, next) {
 
 // Aplicar routerUsuarioToken
 app.use('/api/catalogue', routerUsuarioToken);
-app.use('/api/convers', routerUsuarioToken);
-app.use('/api/addmensaje', routerUsuarioToken);
+app.use('/api/conver*', routerUsuarioToken);
 app.use('/api/chat*', routerUsuarioToken);
+
 
 
 

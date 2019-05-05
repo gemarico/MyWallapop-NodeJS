@@ -65,7 +65,7 @@ p {
 }
 
 nav {
-    max-height: 60px;
+    height: 60px;
     margin-bottom:20px;
 }
 
@@ -77,14 +77,14 @@ nav {
 
     }
 
+    nav {
+        height: auto;
+    }
     ul li {
         font-size: 11px;
     }
 
-    nav {
-        height: 100%;
 
-    }
     h1, h2, h3, h4 {
         font-size: 16px;
 
@@ -107,7 +107,7 @@ nav {
     }
 
     nav {
-        height: 100%;
+        height: auto;
     }
 
     ul li {
@@ -267,6 +267,11 @@ img{ max-width:100%;}
     margin: 0;
     padding: 5px 10px 5px 12px;
     width: 100%;
+}
+i.fa {
+
+    animation: move 4s infinite;
+
 }
 .time_date {
     color: #747474;

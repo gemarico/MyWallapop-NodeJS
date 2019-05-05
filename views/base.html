@@ -23,10 +23,11 @@
 
 <!-- Barra de Navegación superior -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <button type="button" class="navbar-toggler" data-toggle="collapse"
-            data-target="#myNavbar">&#x2630;
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="myNavbar">
+    <div class="collapse navbar-collapse" id="navbarColor01">
         <a class="navbar-brand" href="/"><img src="/img/logo-sm-1.png"></a>
         <ul class="nav navbar-nav mr-auto">
             {% if usuario!=null && usuario.email != "admin@email.com" %}

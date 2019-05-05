@@ -165,7 +165,7 @@ module.exports = {
                 funcionCallback(null);
             } else {
                 var collection = db.collection('convers');
-                collection.removeMany(criterio, function (err, result) {
+                collection.removeOne(criterio, function (err, result) {
                     if (err) {
                         funcionCallback(null);
                     } else {
