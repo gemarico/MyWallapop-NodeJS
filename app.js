@@ -1,5 +1,6 @@
 // Módulos
 var express = require('express');
+var logger = require('./utils/logger');
 var app = express();
 var mongo = require('mongodb');
 var swig = require('swig');
@@ -52,7 +53,7 @@ routerUsuarioSession.use(function (req, res, next) {
         // dejamos correr la petición
         next();
     } else {
-        console.log("va a : " + req.session.destination)
+        console.log("va a : " + req.session.destination);
         res.redirect("/login");
     }
 });
@@ -77,7 +78,7 @@ routerUsuarioToken.use(function (req, res, next) {
                     error: 'Token invalido o caducado'
                 });
                 // También podríamos comprobar que intoToken.usuario existe
-                return;
+
 
             } else {
                 // dejamos correr la petición
@@ -139,21 +140,20 @@ app.get('/', function (req, res) {
 });
 
 //rutas
-require("./routes/rusuarios.js")(app, swig, gestorBD);
-require("./routes/rofertas.js")(app, swig, gestorBD);
-require("./routes/rapichat.js")(app, swig, jwt, gestorBD);
+require("./routes/rusuarios.js")(app, swig, gestorBD,logger);
+require("./routes/rofertas.js")(app, swig, gestorBD,logger);
+require("./routes/rapichat.js")(app, swig, jwt, gestorBD,logger);
 
 
 //uso de public
 app.use(express.static('public'));
 
 //lanzar el servidor
-
 https.createServer({
     key: fs.readFileSync('certificates/alice.key'),
     cert: fs.readFileSync('certificates/alice.crt')
 }, app).listen(app.get('port'), function () {
-    console.log("Servidor activo");
+    logger.info("Servidor activo");
 });
 // app.listen(app.get('port'), function () {
 //     console.log("Servidor activo");
