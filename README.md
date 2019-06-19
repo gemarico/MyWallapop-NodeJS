@@ -1,6 +1,7 @@
 # MyWallapop-NodeJS
 
-Hey there! This is the web application I presented for my evaluation of the subject SDI. It's a web application for buying and selling between individuals like Wallapop. Also there is a chat called MyChat that tries to simulate a real time chat like Whatsapp. 
+Hey there! This is the web application I presented for my evaluation of the subject SDI. It's a web application for buying and selling between individuals like Wallapop. 
+Also there is a chat called MyChat that tries to simulate a real time chat like Whatsapp. 
 
 You can try it here http://ec2-34-251-249-151.eu-west-1.compute.amazonaws.com:8081/ 
  
