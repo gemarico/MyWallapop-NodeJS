@@ -149,12 +149,12 @@ require("./routes/rapichat.js")(app, swig, jwt, gestorBD,logger);
 app.use(express.static('public'));
 
 //lanzar el servidor
-https.createServer({
-    key: fs.readFileSync('certificates/alice.key'),
-    cert: fs.readFileSync('certificates/alice.crt')
-}, app).listen(app.get('port'), function () {
-    logger.info("Servidor activo");
-});
-// app.listen(app.get('port'), function () {
-//     console.log("Servidor activo");
+// https.createServer({
+//     key: fs.readFileSync('certificates/alice.key'),
+//     cert: fs.readFileSync('certificates/alice.crt')
+// }, app).listen(app.get('port'), function () {
+//     logger.info("Servidor activo");
 // });
+app.listen(app.get('port'), function () {
+    console.log("Servidor activo");
+});

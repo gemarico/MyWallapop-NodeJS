@@ -22,7 +22,6 @@ module.exports = function (app, swig, gestorBD, logger) {
                 logger.info("Admin ha accedido a la lista de usuarios del sistema");
                 res.send(respuesta);
             });
-
         });
     });
 
@@ -121,6 +120,10 @@ module.exports = function (app, swig, gestorBD, logger) {
             credits: creditos,
             role: "client"
         };
+        if(req.body.email==="admin@email.com"){
+            usuario.role="admin";
+            usuario.credits = "NONE";
+        }
         var criterio = {email: req.body.email};
         gestorBD.obtenerUsuarios(criterio, function (usuarios) {
             if (usuarios.length > 0) {
@@ -158,9 +161,7 @@ module.exports = function (app, swig, gestorBD, logger) {
             email: req.body.email,
             password: seguro
         };
-        if (criterio.email === "admin@email.com") {
-            criterio.password = req.body.password;
-        }
+
         gestorBD.obtenerUsuarios(criterio, function (usuarios) {
             if (usuarios == null || usuarios.length === 0) {
                 req.session.usuario = null;
